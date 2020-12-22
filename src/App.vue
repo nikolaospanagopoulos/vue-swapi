@@ -1,28 +1,51 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template>
+
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+
+import Particle from './components/Background/Particle.vue'
+
+import StarWarsIntro from './components/StarWarsIntro/StarWrsIntro.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Particle,
+    
+   
+ 
+  },
+  render(){
+    return(
+      <div onClick={()=>this.enterWebsite()}>
+      {this.close && <StarWarsIntro/>}
+      {!this.close && <RouterView/>}
+       <RouterLink to='/people'>Prople</RouterLink>
+       
+      
+     
+      <Particle/>
+      
+      
+      </div>
+    )
+  },
+  data(){
+    return{
+      close:true
+    }
+  },
+  methods:{
+    enterWebsite(){
+      this.close=false
+    }
   }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+body{
+  background-color: black;
 }
 </style>
