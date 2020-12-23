@@ -1,30 +1,45 @@
 <script>
 import axios from "axios";
+import Loader from '../components/Loader/Loader'
+
+
 export default {
   data() {
     return {
       json_data: [],
+      loading:true
     };
   },
+  components:{},
   methods: {
     async fetchPlanets() {
       const { data } = await axios.get("https://swapi.dev/api/planets");
-
+      this.loading = false
       this.json_data = data.results;
-      
     },
   },
   render() {
     return (
+      
       <div>
-        <h1 class="main-title">star wars</h1>
-        <h3 class='main-subtitle'> An App created to spread the star wars knowledge to the world </h3>
-    
+        {this.loading ? <Loader/> : (
+          <div>
+          <h1 class="main-title">star wars</h1>
+        <h3 class="main-subtitle">
+          {" "}
+          An App created to spread the star wars knowledge to the world{" "}
+        </h3>
+
         <div class="download-container">
           <downloadCsv data={this.json_data}>
             <button class="download-button">download planet information</button>
           </downloadCsv>
+      
         </div>
+          
+          </div>
+        )}
+        
       </div>
     );
   },
@@ -73,21 +88,21 @@ export default {
   color: black;
 }
 
-.main-subtitle{
-    font-family: "starwars";
+.main-subtitle {
+  font-family: "starwars";
   font-size: 3rem;
   color: #ffe066;
   text-align: center;
 }
-@media screen and (max-width: 768px){
-    .main-title{
-        font-size: 5rem;
-    }
-    .main-subtitle{
-        font-size: 2rem;
-    }
-    .download-container{
-        top: 0vh;
-    }
+@media screen and (max-width: 768px) {
+  .main-title {
+    font-size: 5rem;
+  }
+  .main-subtitle {
+    font-size: 2rem;
+  }
+  .download-container {
+    top: 0vh;
+  }
 }
 </style>

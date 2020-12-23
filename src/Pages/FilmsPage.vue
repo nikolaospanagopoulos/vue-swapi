@@ -1,26 +1,24 @@
-
-
 <script>
 import axios from "axios";
-import Loader from '../components/Loader/Loader'
-import PersonCard from "../components/PersonCard/PersonCard.vue";
+import FilmCard from "../components/FilmCard/FilmCard";
+import Loader from "../components/Loader/Loader";
 export default {
-  components: { PersonCard },
+  components: { FilmCard },
   data() {
     return {
-      people: [],
-      loading:true
+      films: [],
+      loading: true,
     };
   },
   methods: {
-    async fetchPeople() {
-      const { data } = await axios.get("https://swapi.dev/api/people");
+    async fetchFilms() {
+      const { data } = await axios.get("https://swapi.dev/api/films");
       this.loading = false;
-      this.people = data.results;
+      this.films = data.results;
     },
   },
   mounted() {
-    this.fetchPeople();
+    this.fetchFilms();
   },
   render() {
     return (
@@ -29,9 +27,9 @@ export default {
           <Loader />
         ) : (
           <div class="grid-container">
-            {this.people.map((person) => (
-              <div class="grid-item" key={person.height}>
-                <PersonCard person={person} />
+            {this.films.map((film) => (
+              <div class="grid-item" key={film.episode_id}>
+                <FilmCard film={film} />
               </div>
             ))}
           </div>
